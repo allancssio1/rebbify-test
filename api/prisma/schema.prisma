@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String    @id @unique @default(uuid())
+  email      String    @unique
+  password   String
+  created_at DateTime? @default(now())
+
+  routeFromUser Route_From_User[]
+
+  @@map("users")
+}
+
+model Route {
+  id          String   @id @unique @default(uuid())
+  name        String
+  source      String
+  destination String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  distance    Float
+  duration    Float
+  direction   Json
+
+  routeFromUser Route_From_User[]
+
+  @@map("routes")
+}
+
+model Route_From_User {
+  id String @id @unique @default(uuid())
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  route    Route  @relation(fields: [route_id], references: [id])
+  route_id String
+
+  @@map("routes_from_users")
+}
+
+model Place {
+  id       String @id @unique @default(uuid())
+  name     String
+  location Coord  @relation(fields: [coord_id], references: [id])
+  coord_id String
+
+  @@map("places")
+}
+
+model Coord {
+  id    String  @id @unique @default(uuid())
+  lat   Float
+  lng   Float
+  Place Place[]
+
+  @@map("coords")
+}
