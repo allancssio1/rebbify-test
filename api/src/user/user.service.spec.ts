@@ -27,7 +27,6 @@ const users: User[] = [
 
 const db = {
   user: {
-    findMany: jest.fn().mockResolvedValue(users),
     findUnique: jest.fn().mockResolvedValue(users[0]),
     findFirst: jest.fn().mockResolvedValue(users[0]),
     create: jest.fn().mockReturnValue(users[0]),
@@ -43,10 +42,6 @@ describe('Testing UserService', () => {
     }).compile();
 
     service = module.get<UserService>(UserService);
-  });
-
-  it('should be defined', async () => {
-    expect(service).toBeDefined();
   });
 
   it('Should be get user by email', async () => {
@@ -71,22 +66,6 @@ describe('Testing UserService', () => {
         password: null,
       }),
     );
-  });
-
-  it('Should be get all users', async () => {
-    const usersArray = await service.findAll();
-
-    expect(usersArray).toEqual([
-      expect.objectContaining({
-        email: 'mock-email-1@email.com',
-      }),
-      expect.objectContaining({
-        email: 'mock-email-2@email.com',
-      }),
-      expect.objectContaining({
-        email: 'mock-email-3@email.com',
-      }),
-    ]);
   });
 
   it('Should be get user by id', async () => {

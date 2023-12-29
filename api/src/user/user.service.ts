@@ -33,11 +33,6 @@ export class UserService {
     return user ?? null;
   }
 
-  async findAll() {
-    const user = await this.prisma.user.findMany();
-    return user ?? null;
-  }
-
   async remove(id: string) {
     const user = await this.prisma.user.findUnique({ where: { id } });
 
