@@ -18,6 +18,7 @@ CREATE TABLE "routes" (
     "updated_at" TIMESTAMP(3) NOT NULL,
     "distance" DOUBLE PRECISION NOT NULL,
     "duration" DOUBLE PRECISION NOT NULL,
+    "direction" JSONB NOT NULL,
 
     CONSTRAINT "routes_pkey" PRIMARY KEY ("id")
 );
