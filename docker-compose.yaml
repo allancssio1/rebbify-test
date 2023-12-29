@@ -1,6 +1,21 @@
 version: '3'
 
 services:
+  # api:
+  #   build: ./api
+  #   ports:
+  #     - 3000-3000
+  #     - 5555-5555
+  #   volumes:
+  #     - ./api:/home/node/app
+
+  # web:
+  #   build: ./web
+  #   ports:
+  #     - 3000-3001
+  #   volumes:
+  #     - ./web:/home/node/app
+
   db:
     image: bitnami/postgresql
     ports:
@@ -9,3 +24,4 @@ services:
       - POSTGRESQL_USERNAME=rebbify
       - POSTGRESQL_PASSWORD=rebbify
       - POSTGRESQL_DATABASE=rebbify
+  
